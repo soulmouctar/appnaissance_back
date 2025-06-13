@@ -32,7 +32,12 @@ public class ProfileController {
     @GetMapping(path = "{id}")
     public Profile read(@PathVariable int id) {
         return this.profilesService.read(id);
-        //return null;
+
+    }
+
+    @PutMapping("{id}")
+    public Profile update(@PathVariable int id, @RequestBody Profile profile) {
+        return this.profilesService.update(id,profile);
     }
 
 }

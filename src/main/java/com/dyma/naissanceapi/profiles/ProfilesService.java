@@ -3,6 +3,9 @@ package com.dyma.naissanceapi.profiles;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,4 +30,15 @@ public class ProfilesService {
         return profile.orElse(null);
     }
 
+
+    public Profile update(int id, Profile profile) {
+        Profile profileInDataBase =  this.read(id);
+        profileInDataBase.setEmail(profile.getEmail());
+        profileInDataBase.setFirstName(profile.getFirstName());
+        profileInDataBase.setLastName(profile.getLastName());
+        profileInDataBase.setPhone(profile.getPhone());
+        profileInDataBase.setPassword(profile.getPassword());
+        profileInDataBase = this.profilesRespository.save(profileInDataBase);
+        return profileInDataBase;
+    }
 }
