@@ -29,7 +29,7 @@ public class ProfileController {
         return this.profilesService.search();
     }
 
-    @GetMapping(path = "{id}")
+    @GetMapping("{id}")
     public Profile read(@PathVariable int id) {
         return this.profilesService.read(id);
 
@@ -38,6 +38,11 @@ public class ProfileController {
     @PutMapping("{id}")
     public Profile update(@PathVariable int id, @RequestBody Profile profile) {
         return this.profilesService.update(id,profile);
+    }
+
+    @DeleteMapping("{id}")
+    public void detete(@PathVariable int id){
+        this.profilesService.delete(id);
     }
 
 }

@@ -41,4 +41,9 @@ public class ProfilesService {
         profileInDataBase = this.profilesRespository.save(profileInDataBase);
         return profileInDataBase;
     }
+
+    public void delete(int id) {
+        Profile profile = this.read(id);
+        profilesRespository.delete(profile);
+    }
 }
