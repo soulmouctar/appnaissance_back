@@ -1,5 +1,6 @@
 package com.dyma.naissanceapi.profiles;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,8 @@ public class ProfilesService {
 
     public Profile read(int id) {
         Optional<Profile> profile = this.profilesRespository.findById(id);
-        return profile.orElse(null);
+        return profile.orElseThrow(()-> new EntityNotFoundException( " " +
+                "Profile not found with id: " + id));
     }
 
 
