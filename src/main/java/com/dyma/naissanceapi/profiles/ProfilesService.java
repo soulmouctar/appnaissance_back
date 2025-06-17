@@ -1,5 +1,6 @@
 package com.dyma.naissanceapi.profiles;
 
+import com.dyma.naissanceapi.shared.services.ValidationsService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +17,11 @@ import java.util.Optional;
 @Slf4j
 public class ProfilesService {
     private final ProfilesRespository profilesRespository;
+    private final ValidationsService validationsService;
 
     public void  create(Profile profile) {
+        validationsService.validateEmail(profile.getEmail());
+        validationsService.validatePhone(profile.getPhone());
         log.info("Nouveau compte crée avec l'email :  {}",  profile.getEmail());
         profilesRespository.save(profile);
     }

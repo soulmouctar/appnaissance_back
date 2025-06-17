@@ -1,4 +1,4 @@
-package com.dyma.naissanceapi.exceptions;
+package com.dyma.naissanceapi.shared.exceptions;
 
 import java.time.LocalDateTime;
 
