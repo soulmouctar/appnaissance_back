@@ -1,13 +1,13 @@
 package com.dyma.naissanceapi.profiles;
 
+import com.dyma.naissanceapi.shared.entity.Address;
+import com.dyma.naissanceapi.shared.repository.AdressesRepository;
+import com.dyma.naissanceapi.shared.services.AdressesService;
 import com.dyma.naissanceapi.shared.services.ValidationsService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,13 +16,18 @@ import java.util.Optional;
 @AllArgsConstructor
 @Slf4j
 public class ProfilesService {
+    private final AdressesService adressesService;
     private final ProfilesRespository profilesRespository;
     private final ValidationsService validationsService;
 
     public void  create(Profile profile) {
+        log.info("Nouveau compte crée avec l'email :  {}",  profile.getEmail());
+        if(profile.getAddress() != null) {
+            Address address = this.adressesService.create(profile.getAddress());
+            profile.setAddress(address);
+        }
         validationsService.validateEmail(profile.getEmail());
         validationsService.validatePhone(profile.getPhone());
-        log.info("Nouveau compte crée avec l'email :  {}",  profile.getEmail());
         profilesRespository.save(profile);
     }
 

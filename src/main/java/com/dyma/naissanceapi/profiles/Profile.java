@@ -1,5 +1,6 @@
 package com.dyma.naissanceapi.profiles;
 
+import com.dyma.naissanceapi.shared.entity.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,4 +25,8 @@ public class Profile {
     @Column(unique = true)
     private String phone;
     private String password;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH})
+    @JoinColumn(name = "address_id", referencedColumnName = "id") 
+    private Address address;
 }
