@@ -9,6 +9,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 class ProfilesServiceTest {
 
@@ -21,12 +23,20 @@ class ProfilesServiceTest {
     @Test
     void shoulReturnAllProfiles() {
         // Arrange
-
+        when(this.profilesRespository.findAll()).thenReturn(
+                List.of(
+                        Profile.builder()
+                                .email("test@test.com")
+                                .lastName("Test")
+                                .firstName("Unknown")
+                                .build()
+                )
+        );
         // Act
         List<Profile>  profile = profilesService.search();
 
         // Assert
-        assertEquals(true, profile.isEmpty());
+        assertEquals(1, profile.size());
 
     }
 }
