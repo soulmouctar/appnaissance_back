@@ -7,7 +7,7 @@ public class ValidationsService  {
 
     public void validateEmail(String email) {
         if (email == null || email.isBlank()) {
-            throw new RuntimeException( "Email cannot be null or empty ");
+            throw new RuntimeException( "Email cannot be null or empty");
         }
         if (email.indexOf('@') == -1 || email.indexOf('@') == email.length()) {
             throw new IllegalArgumentException("Email est invalide ");
