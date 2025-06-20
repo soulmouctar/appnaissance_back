@@ -1,0 +1,14 @@
+
+logging:
+  level:
+    com.dyma.naissanceapi: trace # Set the logging level for the application to trace
+spring:
+  datasource:
+    username:  postgres
+    password:  123456
+    url:       jdbc:postgresql://localhost:5432/naissance
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update # Automatically update the database schema
+    show-sql: true # Show SQL statements in the logs
