@@ -9,12 +9,13 @@ import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-@DataJpaTest
-@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+import static org.springframework.boot.jdbc.EmbeddedDatabaseConnection.H2;
 
+@DataJpaTest
+@AutoConfigureTestDatabase(connection = H2)
 public class ProfileRepositoryTest {
     @Autowired
-    private ProfilesRespository profilesRepository;
+    ProfilesRespository profilesRepository;
 
     @Test
     void shouldReturnListOfProfiles() {
