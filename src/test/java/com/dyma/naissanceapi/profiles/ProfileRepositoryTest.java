@@ -10,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import static org.springframework.boot.jdbc.EmbeddedDatabaseConnection.H2;
-
+//Ajout des test pour le repository des profils
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = H2)
 public class ProfileRepositoryTest {
