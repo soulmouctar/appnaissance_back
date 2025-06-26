@@ -5,10 +5,11 @@ logging:
 spring:
   datasource:
     username:  postgres
-    password:  123456
+    password:  1234
     url:       jdbc:postgresql://localhost:5432/naissance
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update # Automatically update the database schema
     show-sql: true # Show SQL statements in the logs
+    #database-platform: org.hibernate.dialect.PostgreSQLDialect

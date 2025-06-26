@@ -7,6 +7,7 @@ import com.dyma.naissanceapi.shared.services.ValidationsService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class ProfilesService {
     private final AdressesService adressesService;
     private final ProfilesRespository profilesRespository;
     private final ValidationsService validationsService;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public void  create(Profile profile) {
         log.info("Nouveau compte crée avec l'email :  {}",  profile.getEmail());
@@ -26,6 +28,9 @@ public class ProfilesService {
             Address address = this.adressesService.create(profile.getAddress());
             profile.setAddress(address);
         }
+        String userPassowrd = profile.getPassword();
+        String passwordEncoded = this.passwordEncoder.encode(userPassowrd);
+        profile.setPassword(passwordEncoded);
         validationsService.validateEmail(profile.getEmail());
         validationsService.validatePhone(profile.getPhone());
         profilesRespository.save(profile);
